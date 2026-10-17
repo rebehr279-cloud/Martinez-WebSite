@@ -1,0 +1,412 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Familia Martinez</title>
+<style>
+:root {
+  --bg: #07101f;
+  --panel: #10213b;
+  --gold: #d9b56d;
+  --text: #f5f1e8;
+  --muted: #aebbd0;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #091529;
+  border-bottom: 1px solid #493c27;
+  padding: 16px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+.logo { color: var(--gold); font-weight: bold; letter-spacing: 2px; }
+nav { display: flex; gap: 18px; flex-wrap: wrap; }
+nav a { color: var(--text); text-decoration: none; font-size: 14px; }
+nav a:hover { color: var(--gold); }
+button, .btn {
+  background: var(--gold);
+  color: #111827;
+  border: 0;
+  padding: 12px 17px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+}
+.hero {
+  min-height: 520px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 70px 20px;
+  background:
+    radial-gradient(ellipse at top, #1b3154, transparent 65%),
+    linear-gradient(140deg, #07101f, #10213b);
+}
+.hero .eyebrow {
+  color: var(--gold);
+  letter-spacing: 5px;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(42px, 8vw, 82px);
+  line-height: 1.05;
+  margin: 22px 0;
+}
+h1 span, h2 span { color: var(--gold); }
+.hero p {
+  max-width: 620px;
+  margin: 0 auto 28px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 45px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+.stats strong {
+  display: block;
+  font: 30px Georgia, serif;
+  color: var(--gold);
+}
+.stats small { color: var(--muted); }
+section { padding: 75px 6%; }
+.section-head { margin-bottom: 28px; }
+.kicker {
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+h2 { font: 40px Georgia, serif; margin: 10px 0; }
+.description { color: var(--muted); line-height: 1.8; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.card {
+  padding: 24px;
+  border: 1px solid #34445b;
+  background: var(--panel);
+  border-radius: 12px;
+  transition: transform .25s, border-color .25s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold);
+}
+.tag {
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.card h3 { font: 24px Georgia, serif; }
+.card p { color: var(--muted); line-height: 1.7; }
+.date { color: var(--gold); font-size: 12px; }
+.avatar {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  display: grid;
+  place-items: center;
+  color: var(--gold);
+  font: 35px Georgia, serif;
+  margin-bottom: 20px;
+  background: #182d4a;
+}
+.event { display: flex; gap: 16px; }
+.event-number { color: var(--gold); font: 32px Georgia, serif; }
+.gallery-tile {
+  min-height: 170px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background: linear-gradient(145deg, #1c3554, #0b1628);
+}
+.gallery-tile strong { display: block; font: 24px Georgia, serif; }
+.tools { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+input {
+  width: 100%;
+  padding: 12px;
+  background: #07101f;
+  border: 1px solid #34445b;
+  color: white;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+.result { color: var(--gold); font-size: 13px; }
+.countdown {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+.time {
+  flex: 1;
+  padding: 12px 4px;
+  text-align: center;
+  border: 1px solid #34445b;
+  border-radius: 6px;
+}
+.time strong { display: block; font: 26px Georgia, serif; color: var(--gold); }
+.time small { color: var(--muted); }
+footer {
+  border-top: 1px solid #493c27;
+  text-align: center;
+  padding: 30px 15px;
+  color: var(--muted);
+}
+body.light {
+  --bg: #f3efe6;
+  --panel: #fffaf0;
+  --text: #172238;
+  --muted: #596579;
+}
+body.light header { background: #fffaf0; }
+body.light input { background: white; color: #172238; }
+.fade-in { animation: appear .9s ease both; }
+@keyframes appear {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media(max-width: 750px) {
+  header { align-items: flex-start; flex-wrap: wrap; }
+  nav { gap: 12px; }
+  .grid, .tools { grid-template-columns: 1fr; }
+  section { padding: 55px 5%; }
+  h2 { font-size: 34px; }
+  .stats { gap: 25px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#home" class="logo">◆ LA FAMILIA MARTINEZ</a>
+  <nav>
+    <a href="#about">Legacy</a>
+    <a href="#news">News</a>
+    <a href="#members">Members</a>
+    <a href="#events">Events</a>
+    <a href="#gallery">Gallery</a>
+  </nav>
+  <button id="themeButton" type="button">☼ Theme</button>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="fade-in">
+    <div class="eyebrow">One Family · One Legacy</div>
+    <h1>Strength in unity.<br><span>Legacy in every name.</span></h1>
+    <p>Welcome to the official digital home of La Familia Martinez — our people, our memories, and our future.</p>
+    <a class="btn" href="#about">Discover Our Legacy ↗</a>
+    <div class="stats">
+      <div><strong>01</strong><small>Family</small></div>
+      <div><strong>∞</strong><small>Memories</small></div>
+      <div><strong>Always</strong><small>Connected</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-head">
+    <div class="kicker">Who We Are</div>
+    <h2>A legacy built on <span>loyalty.</span></h2>
+  </div>
+  <p class="description">La Familia Martinez represents respect, loyalty, ambition, and unity. This website is our digital home for news, family members, celebrations, and memories. Our story continues with every new chapter.</p>
+  <div class="grid">
+    <article class="card"><span class="tag">Our Value</span><h3>Respect</h3><p>We treat every member with dignity.</p></article>
+    <article class="card"><span class="tag">Our Value</span><h3>Loyalty</h3><p>We stay united through every chapter.</p></article>
+    <article class="card"><span class="tag">Our Value</span><h3>Legacy</h3><p>We build memories worth keeping.</p></article>
+  </div>
+</section>
+
+<section id="news">
+  <div class="section-head">
+    <div class="kicker">Latest Updates</div>
+    <h2>News & <span>Announcements</span></h2>
+    <p class="description">The latest news from La Familia Martinez.</p>
+  </div>
+  <div class="grid">
+    <article class="card"><span class="tag">Announcement</span><h3>A New Chapter Begins</h3><p>Welcome to the new digital home of La Familia Martinez. Stay connected for upcoming news and updates.</p><div class="date">OCTOBER 2026</div></article>
+    <article class="card"><span class="tag">Community</span><h3>Stay Connected</h3><p>Visit this section to keep up with family announcements and special occasions.</p><div class="date">FAMILY UPDATE</div></article>
+    <article class="card"><span class="tag">Memories</span><h3>Our Story Continues</h3><p>Every new moment becomes part of our shared family story.</p><div class="date">FAMILY NEWS</div></article>
+  </div>
+</section>
+
+<section id="members">
+  <div class="section-head">
+    <div class="kicker">The People</div>
+    <h2>Family <span>Members</span></h2>
+    <p class="description">Replace these sample profiles with your real family names and roles.</p>
+  </div>
+  <div class="grid">
+    <article class="card"><div class="avatar">M</div><span class="tag">Leadership</span><h3>Family Leader</h3><p>Guiding the family with respect and purpose.</p></article>
+    <article class="card"><div class="avatar">M</div><span class="tag">Core Member</span><h3>Family Member</h3><p>Helping build our shared story and traditions.</p></article>
+    <article class="card"><div class="avatar">M</div><span class="tag">Community</span><h3>Family Member</h3><p>Keeping the family bond strong.</p></article>
+  </div>
+</section>
+
+<section id="events">
+  <div class="section-head">
+    <div class="kicker">Save The Date</div>
+    <h2>Family <span>Events</span></h2>
+    <p class="description">Add your real event details and dates here.</p>
+  </div>
+  <div class="grid">
+    <article class="card event"><div class="event-number">01</div><div><h3>Family Gathering</h3><p class="description">Date to be announced.</p></div></article>
+    <article class="card event"><div class="event-number">02</div><div><h3>Special Celebration</h3><p class="description">Add confirmed details here.</p></div></article>
+    <article class="card event"><div class="event-number">03</div><div><h3>Community Day</h3><p class="description">Stay tuned for updates.</p></div></article>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="section-head">
+    <div class="kicker">Moments That Matter</div>
+    <h2>Family <span>Gallery</span></h2>
+    <p class="description">A place for celebrations, milestones, and favorite memories.</p>
+  </div>
+  <div class="grid">
+    <div class="card gallery-tile"><div>✦<strong>Our Story</strong><small>Memories worth keeping</small></div></div>
+    <div class="card gallery-tile"><div>◇<strong>Celebrations</strong><small>Moments together</small></div></div>
+    <div class="card gallery-tile"><div>✧<strong>Traditions</strong><small>Our legacy continues</small></div></div>
+  </div>
+  <p class="description">To add real photos, upload image files to your repository and add image tags here.</p>
+</section>
+
+<section id="tools">
+  <div class="section-head">
+    <div class="kicker">Interactive Features</div>
+    <h2>Family <span>Tools</span></h2>
+  </div>
+  <div class="tools">
+    <article class="card">
+      <h3>Search This Website</h3>
+      <p class="description">Find a section or keyword.</p>
+      <form id="searchForm">
+        <input id="searchInput" type="search" placeholder="Try news, events, loyalty..." aria-label="Search website">
+        <button type="submit">Search</button>
+      </form>
+      <p id="searchResult" class="result"></p>
+    </article>
+    <article class="card">
+      <h3>Event Countdown</h3>
+      <p class="description">Choose an upcoming family date.</p>
+      <input id="eventDate" type="date" aria-label="Event date">
+      <button id="countdownButton" type="button">Start Countdown</button>
+      <div class="countdown">
+        <div class="time"><strong id="days">—</strong><small>Days</small></div>
+        <div class="time"><strong id="hours">—</strong><small>Hours</small></div>
+        <div class="time"><strong id="minutes">—</strong><small>Minutes</small></div>
+      </div>
+      <p id="countdownMessage" class="result">Choose a date to begin.</p>
+    </article>
+  </div>
+</section>
+</main>
+
+<footer>
+  <strong>LA FAMILIA MARTINEZ</strong>
+  <p>Respect · Loyalty · Legacy</p>
+  © <span id="year"></span> La Familia Martinez. Made for the family.
+  <p><a href="#home">Back to top ↑</a></p>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+document.getElementById('themeButton').addEventListener('click', function () {
+  document.body.classList.toggle('light');
+  this.textContent = document.body.classList.contains('light') ? '☾ Theme' : '☼ Theme';
+});
+
+document.getElementById('searchForm').addEventListener('submit', function (event) {
+  event.preventDefault();
+  const term = document.getElementById('searchInput').value.trim().toLowerCase();
+  const result = document.getElementById('searchResult');
+
+  if (!term) {
+    result.textContent = 'Type a word to search.';
+    return;
+  }
+
+  const elements = document.querySelectorAll('main h1, main h2, main h3, main p');
+  let found = null;
+
+  for (const element of elements) {
+    if (element.textContent.toLowerCase().includes(term)) {
+      found = element;
+      break;
+    }
+  }
+
+  if (found) {
+    found.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    result.textContent = 'Found a match for: ' + term;
+  } else {
+    result.textContent = 'No match found. Try another word.';
+  }
+});
+
+let countdownTimer = null;
+
+document.getElementById('countdownButton').addEventListener('click', function () {
+  const value = document.getElementById('eventDate').value;
+  const message = document.getElementById('countdownMessage');
+
+  if (!value) {
+    message.textContent = 'Please choose a date first.';
+    return;
+  }
+
+  const target = new Date(value + 'T00:00:00');
+
+  if (countdownTimer) clearInterval(countdownTimer);
+
+  function updateCountdown() {
+    const difference = target.getTime() - Date.now();
+
+    if (difference <= 0) {
+      document.getElementById('days').textContent = '0';
+      document.getElementById('hours').textContent = '0';
+      document.getElementById('minutes').textContent = '0';
+      message.textContent = 'The selected day has arrived or passed!';
+      clearInterval(countdownTimer);
+      return;
+    }
+
+    const totalMinutes = Math.floor(difference / 60000);
+    document.getElementById('days').textContent = Math.floor(totalMinutes / 1440);
+    document.getElementById('hours').textContent = Math.floor((totalMinutes % 1440) / 60);
+    document.getElementById('minutes').textContent = totalMinutes % 60;
+    message.textContent = 'Counting down to ' + target.toLocaleDateString();
+  }
+
+  updateCountdown();
+  countdownTimer = setInterval(updateCountdown, 60000);
+});
+</script>
+
+</body>
+</html>
